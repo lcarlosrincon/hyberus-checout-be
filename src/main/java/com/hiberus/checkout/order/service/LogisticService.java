@@ -4,6 +4,8 @@ import com.hiberus.checkout.order.dto.Order;
 
 public interface LogisticService {
 
-	String create(Order order, Double total);
+	String LOGISTIC_RESOURCE = "/logistic";
+
+	String create(Order order);
 
 }

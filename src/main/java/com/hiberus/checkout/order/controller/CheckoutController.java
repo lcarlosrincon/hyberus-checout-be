@@ -30,10 +30,9 @@ public class CheckoutController {
 	@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<ObjectResponseSuccess<NewOrderDataResponse>> insert(@RequestBody @Valid Order request) {
 		log.debug("Received new order of client:" + request.getClientId());
-		String id = this.checkoutService.createOrder(request);
-		log.debug("New order was created:" + id);
-		return ResponseEntity.status(HttpStatus.OK)
-				.body(new ObjectResponseSuccess<NewOrderDataResponse>(NewOrderDataResponse.builder().id(id).build()));
+		NewOrderDataResponse res = this.checkoutService.createOrder(request);
+		log.debug("New order was created:" + res);
+		return ResponseEntity.status(HttpStatus.OK).body(new ObjectResponseSuccess<NewOrderDataResponse>(res));
 	}
 
 	public CheckoutService getCheckoutService() {

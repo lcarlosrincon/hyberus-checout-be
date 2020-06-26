@@ -3,6 +3,7 @@ package com.hiberus.checkout.order.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.hiberus.checkout.order.dto.NewOrderDataResponse;
 import com.hiberus.checkout.order.dto.Order;
 import com.hiberus.checkout.order.service.BillService;
 import com.hiberus.checkout.order.service.CheckoutService;
@@ -21,12 +22,12 @@ public class CheckoutServiceImpl extends HiberusCheckoutServiceBaseImpl implemen
 	private LogisticService logisticService;
 
 	@Override
-	public String createOrder(Order order) {
+	public NewOrderDataResponse createOrder(Order order) {
 		Double total = this.billService.calculateTotal(order);
 		log.debug("The totl cost of the order {} is {}", order.getClientId(), total);
-		String id = this.logisticService.create(order, total);
-		log.debug("Order finished", order.getClientId(), total);
-		return id;
+		String id = this.logisticService.create(order);
+		log.debug("Order finished", order.getClientId(), total, id);
+		return NewOrderDataResponse.builder().order(order).total(total).build();
 	}
 
 	public BillService getBillService() {

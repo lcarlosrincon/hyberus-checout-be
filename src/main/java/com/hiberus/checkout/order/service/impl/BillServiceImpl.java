@@ -23,7 +23,6 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class BillServiceImpl extends HiberusCheckoutServiceBaseImpl implements BillService {
 
-	private static final String BILL_SERVICE = "/bill";
 	private String url;
 
 	private RestTemplate restTemplate;
@@ -31,7 +30,7 @@ public class BillServiceImpl extends HiberusCheckoutServiceBaseImpl implements B
 
 	@Override
 	public Double calculateTotal(Order order) {
-		String url = this.url + BILL_SERVICE;
+		String url = this.url + BILL_RESOURCE;
 		log.debug("Calling bill service");
 		Products request = this.getConversionService().convert(order, Products.class);
 		ResponseEntity<BillResponse> response = this.restTemplate.exchange(url, HttpMethod.PUT,

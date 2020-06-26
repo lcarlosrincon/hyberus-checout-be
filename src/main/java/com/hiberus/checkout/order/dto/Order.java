@@ -16,6 +16,8 @@ import lombok.Data;
 
 @Data
 public class Order {
+	
+	private String id;
 
 	@NotNull
 	private Long clientId;
