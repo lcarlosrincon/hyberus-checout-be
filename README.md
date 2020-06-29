@@ -13,7 +13,7 @@ On your root code execute:
 
 On your navigator put: http://localhost:8080/checkout
 
-You must be run logistic and bill container.
+You must be run [logistic](https://github.com/lcarlosrincon/hiberus-logistic-be) and [bill](https://github.com/lcarlosrincon/hiberus-bill-be) container.
 
 #### Network for containers
 
