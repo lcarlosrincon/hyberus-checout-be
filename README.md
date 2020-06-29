@@ -9,11 +9,23 @@ On your root code execute:
 
 **docker build -t lcarlosrincon/hiberus-checkout .*
 
-*docker run -p 8080:8080 lcarlosrincon/hiberus-checkout*
+*docker run --name checkout -e "SPRING_PROFILES_ACTIVE=prod" -p 8080:8080 lcarlosrincon/hiberus-checkout*
 
 On your navigator put: http://localhost:8080/checkout
 
 You must be run logistic and bill container.
+
+#### Network for containers
+
+You'll need this configuracion in the docker environment for running the services in differents containers:
+
+docker network create --gateway 172.168.1.1 --subnet 172.168.1.0/24 hiberus-net
+
+docker network connect --ip 172.168.1.2 hiberus-net checkout
+
+docker network connect --ip 172.168.1.3 hiberus-net bill
+
+docker network connect --ip 172.168.1.4 hiberus-net logistic
 
 ### General service instructions
 
